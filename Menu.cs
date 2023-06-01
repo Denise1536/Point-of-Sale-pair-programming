@@ -10,8 +10,22 @@ namespace Point_of_Sale_Terminal_project
     {
         //12 items minimum, stored in a list: name, category, price, description
 
+        private List<Wine> WineInventory;
 
+        public Menu()
+        {
+            WineInventory = new List<Wine>();
+        }
 
+        public void AddWine(Wine newWine)
+        {
+            WineInventory.Add(newWine);
+        }
+
+        public void RemoveWine(Wine newWine)
+        {
+            WineInventory.Remove(newWine);
+        }
 
         //
 
