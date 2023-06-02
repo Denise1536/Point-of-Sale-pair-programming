@@ -11,7 +11,7 @@ namespace Point_of_Sale_Terminal_project
     {
 
         
-        public string CreditCard()
+        public override string GetPayment(double grandTotal)
         {
             //Putting these all as strings: since we're not doing math with it, we don't need int.
             Console.WriteLine("What is your credit card number?");
