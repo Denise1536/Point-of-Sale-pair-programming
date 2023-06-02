@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Point_of_Sale_Terminal_project
 {
-    internal class PaymentMethods
+    abstract class PaymentMethods
     {
-       
 
+        public abstract string GetPayment(double grandTotal);
 
        
 

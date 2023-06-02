@@ -9,7 +9,7 @@ namespace Point_of_Sale_Terminal_project
     internal class ProcessCheck : PaymentMethods
     {
 
-        string AskCheckNumber()
+       public override string GetPayment(double grandTotal)
         {
             Console.WriteLine("What is the check number?");
             string checkNumber = Console.ReadLine();
