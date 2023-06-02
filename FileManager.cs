@@ -11,7 +11,8 @@ namespace Point_of_Sale_Terminal_project
 {
     internal class FileManager
     {
-        
+        private List<Wine> wineList;
+        private string FilePath = "./Assests/DataFiles/WineList.txt";
 
         Wine boizel = new Wine(101, "Boizel", "Champagne", "Champagne, FR", "NV", 49.99, 24);
         Wine moet = new Wine(102, "Moet & Chandon", "Champagne", "Champagne, FR", "NV", 59.99, 24);
@@ -28,16 +29,15 @@ namespace Point_of_Sale_Terminal_project
 
         public void LoadWineList()
         {
-            string filePath = "./Assests/DataFiles/WineList.txt";
-            if (!File.Exists(filePath))
-            {
-                List<Wine> wineList = new List<Wine> 
-                {
-                    boizel, moet, domP, krug, duckhorn, lucia, jadotPuligny, latourCorton, tePa, merryEdwardsSB, jolivetPiton, trimbach,
-                };
-               
+            wineList = new List<Wine> { };
 
-                using(StreamWriter writer = new StreamWriter(filePath))
+            if (!File.Exists(FilePath))
+            {
+
+                wineList.Add(boizel); wineList.Add(moet); wineList.Add(domP); wineList.Add(krug); wineList.Add(duckhorn); wineList.Add(lucia);
+                wineList.Add(jadotPuligny); wineList.Add(latourCorton); wineList.Add(tePa); wineList.Add(merryEdwardsSB); wineList.Add(jolivetPiton); wineList.Add(trimbach);
+                                           
+                using(StreamWriter writer = new StreamWriter(FilePath))
                 {
                     foreach(Wine wine in wineList)
                     {                        
@@ -48,8 +48,29 @@ namespace Point_of_Sale_Terminal_project
             }
             else
             {
+                using(StreamReader reader = new StreamReader(FilePath))
+                {
+                    string line;
+                    while((line = reader.ReadLine()) != null)
+                    {
+                        Wine savedWine = JsonConvert.DeserializeObject<Wine>(line);
+                        wineList.Add(savedWine);
+                    }
+                }
 
             }
+        }
+
+        public void SaveWineList()
+        {
+            using (StreamWriter writer = new StreamWriter(FilePath))
+            {
+                foreach (Wine wine in wineList)
+                {
+                    writer.WriteLine(JsonConvert.SerializeObject(wine));
+                }
+            }
+
         }
 
        
