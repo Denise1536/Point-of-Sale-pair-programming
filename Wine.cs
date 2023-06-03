@@ -26,5 +26,10 @@ namespace Point_of_Sale_Terminal_project
             Price = price;
             InventoryCount = inventoryCount;
         }
+
+        public override string ToString()
+        {
+            return string.Format("Bin: (0), (1), (2), (3), (4), $(5). (6) in stock.", BinNumber, WineName, Varietal, Region, Vintage, Price, InventoryCount);
+        }
     }
 }

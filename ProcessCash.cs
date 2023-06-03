@@ -9,6 +9,7 @@ namespace Point_of_Sale_Terminal_project
     internal class ProcessCash : PaymentMethods
     {
         public override string GetPayment(double grandTotal)
+
         {
             double change = -1;
 
