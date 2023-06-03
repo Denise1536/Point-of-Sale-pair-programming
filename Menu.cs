@@ -10,7 +10,7 @@ namespace Point_of_Sale_Terminal_project
     {
         //12 items minimum, stored in a list: name, category, price, description
 
-        private List<Wine> WineInventory;
+        private List<Wine> WineInventory {  get; set; }
 
         public Menu()
         {
@@ -27,6 +27,11 @@ namespace Point_of_Sale_Terminal_project
             WineInventory.Remove(newWine);
         }
 
+        public List<Wine> GetMenuList()
+        {
+            return WineInventory;
+        }
+
         public void DisplayMenu()
         {
             foreach(Wine wine in WineInventory)
@@ -36,9 +41,6 @@ namespace Point_of_Sale_Terminal_project
                 Console.WriteLine("Please order by Bin Number.");
             }
         }
-
-        //
-
 
     }
 }
