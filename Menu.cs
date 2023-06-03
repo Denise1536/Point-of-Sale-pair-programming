@@ -27,6 +27,16 @@ namespace Point_of_Sale_Terminal_project
             WineInventory.Remove(newWine);
         }
 
+        public void DisplayMenu()
+        {
+            foreach(Wine wine in WineInventory)
+            {
+                Console.WriteLine(wine.ToString());
+
+                Console.WriteLine("Please order by Bin Number.");
+            }
+        }
+
         //
 
 
