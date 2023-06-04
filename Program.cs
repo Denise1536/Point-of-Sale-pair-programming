@@ -9,6 +9,7 @@ double salesTax = -1;
 double grandTotal = -1;
 
 
+
 //Present the menu to the user, and let them choose an item (by number or letter)
 
 //Allow the user to choose quantity ordered
