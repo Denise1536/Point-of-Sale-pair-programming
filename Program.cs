@@ -9,6 +9,7 @@ double salesTax = -1;
 double grandTotal = -1;
 
 
+
 //Present the menu to the user, and let them choose an item (by number or letter)
 Console.WriteLine("Welcome to Platinum Pour! We have a variety of white wines for sale. Here is our menu:");
 
