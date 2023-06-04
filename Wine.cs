@@ -34,7 +34,7 @@ namespace Point_of_Sale_Terminal_project
 
         public string ReceiptString()
         {
-            return string.Format("(1),  (5)", WineName, Price);
+            return string.Format("(1).........$(5)", WineName, Price);
         }
     }
 }
