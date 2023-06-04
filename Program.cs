@@ -10,6 +10,8 @@ double grandTotal = -1;
 
 
 //Present the menu to the user, and let them choose an item (by number or letter)
+Console.WriteLine("Welcome to Platinum Pour! We have a variety of white wines for sale. Here is our menu:");
+
 
 //Allow the user to choose quantity ordered
 
@@ -28,31 +30,40 @@ Console.WriteLine($"Your total order comes to ${subTotal}, plus ${salesTax} in t
 
 
 //Ask for payment type
-Console.WriteLine("Enter the number that matches your payment method: 1: Credit Card; 2: Cash; 3: Check");
-string paymentChoice = Console.ReadLine().ToLower();
-//TO DO: make a loop to error check user entry.
-switch (paymentChoice)
+int paymentChoice = -1;
+
+//TO DO: add a try catch for Format Exception?
+
+do
 {
-    case "1":
-        //trigger make receipt with credit card
-        break;
+    Console.WriteLine("Enter the number that matches your payment method: 1: Credit Card; 2: Cash; 3: Check");
+    paymentChoice = int.Parse(Console.ReadLine());
 
-    case "2":
-        //trigger make receipt with cash
-        break;
+    switch (paymentChoice)
+    {
+        case 1:
+            //Call ProcessCard
+            break;
 
-    case "3":
-        //trigger make receipt with check
-        break;
+        case 2:
+            //Call ProcessCash
+            break;
 
-    default:
+        case 3:
+            //Call ProcessCheck
+            break;
+    }
+
+    if (paymentChoice! > 0 || paymentChoice! < 4)
+    {
         Console.WriteLine("That is not a valid option.");
-        break;
-}
+    }
+
+} while (paymentChoice > 0 || paymentChoice < 4);
 
 
 //Display a receipt with items ordered, subtotal, grand total, payment info
-//This will happen based on the switch case above. 
+//This will happen based on the do while loop above. 
 
 
 //Return to the original menu for a new order
