@@ -31,5 +31,10 @@ namespace Point_of_Sale_Terminal_project
         {
             return string.Format("Bin: (0), (1), (2), (3), (4), $(5). (6) in stock.", BinNumber, WineName, Varietal, Region, Vintage, Price, InventoryCount);
         }
+
+        public string ReceiptString()
+        {
+            return string.Format("(1),  (5)", WineName, Price);
+        }
     }
 }
