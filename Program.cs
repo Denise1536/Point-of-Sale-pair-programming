@@ -25,6 +25,8 @@ salesTax = subTotal * 0.06;
 grandTotal = subTotal + salesTax;
 
 
+
+
 //Ask for payment type
 Console.WriteLine("Enter the number that matches your payment method: 1: Credit Card; 2: Cash; 3: Check");
 string paymentChoice = Console.ReadLine().ToLower();
