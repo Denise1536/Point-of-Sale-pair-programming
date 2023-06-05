@@ -2,7 +2,7 @@
 
 
 using Point_of_Sale_Terminal_project;
-using System.Collections.Concurrent;
+using System;
 
 double subTotal = -1;
 double salesTax = -1;
@@ -11,7 +11,12 @@ double grandTotal = -1;
 
 
 //Present the menu to the user, and let them choose an item (by number or letter)
+Console.WriteLine("Welcome to Platinum Pour! We have a variety of white wines for sale. Here is our menu:");
+Menu FullMenu = new Menu();
+FullMenu.ToString();
+
 //Allow the user to choose quantity ordered
+
 //Give the user a line total (item price * quantity)
 
 
@@ -20,37 +25,49 @@ double grandTotal = -1;
 
 
 //Give the subtotal, sales tax, and grand total (rounding issues/math library)
-
 salesTax = subTotal * 0.06;
 grandTotal = subTotal + salesTax;
+Console.WriteLine($"Your total order comes to ${subTotal}, plus ${salesTax} in tax, for a grand total of ${grandTotal}.");
+
 
 
 
 
 //Ask for payment type
-Console.WriteLine("Enter the number that matches your payment method: 1: Credit Card; 2: Cash; 3: Check");
-string paymentChoice = Console.ReadLine().ToLower();
-switch (paymentChoice)
+int paymentChoice = -1;
+
+//TO DO: add a try catch for Format Exception?
+
+do
 {
-    case "1":
-        //trigger make receipt with credit card
-        break;
+    Console.WriteLine("Enter the number that matches your payment method: 1: Credit Card; 2: Cash; 3: Check");
+    paymentChoice = int.Parse(Console.ReadLine());
 
-    case "2":
-        //trigger make receipt with cash
-        break;
+    switch (paymentChoice)
+    {
+        case 1:
+            //Call ReceiptMaker/ProcessCard
+            break;
 
-    case "3":
-    //trigger make receipt with check
-    break;
+        case 2:
+            //Call ReceiptMaker/ProcessCash
+            break;
 
-    default:
-        Console.WriteLine("");
-}
+        case 3:
+            //Call ReceiptMaker/ProcessCheck
+            break;
+    }
+
+    if (paymentChoice! > 0 || paymentChoice! < 4)
+    {
+        Console.WriteLine("That is not a valid option.");
+    }
+
+} while (paymentChoice > 0 || paymentChoice < 4);
 
 
 //Display a receipt with items ordered, subtotal, grand total, payment info
-//Use class: ReceiptMaker
+//This will happen based on the do while loop above. 
 
 
 //Return to the original menu for a new order
