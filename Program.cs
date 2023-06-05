@@ -31,6 +31,8 @@ Console.WriteLine($"Your total order comes to ${subTotal}, plus ${salesTax} in t
 
 
 
+
+
 //Ask for payment type
 int paymentChoice = -1;
 
