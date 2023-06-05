@@ -2,7 +2,7 @@
 
 
 using Point_of_Sale_Terminal_project;
-using System.Collections.Concurrent;
+using System;
 
 double subTotal = -1;
 double salesTax = -1;
@@ -12,7 +12,8 @@ double grandTotal = -1;
 
 //Present the menu to the user, and let them choose an item (by number or letter)
 Console.WriteLine("Welcome to Platinum Pour! We have a variety of white wines for sale. Here is our menu:");
-
+Menu FullMenu = new Menu();
+FullMenu.ToString();
 
 //Allow the user to choose quantity ordered
 
@@ -43,15 +44,15 @@ do
     switch (paymentChoice)
     {
         case 1:
-            //Call ProcessCard
+            //Call ReceiptMaker/ProcessCard
             break;
 
         case 2:
-            //Call ProcessCash
+            //Call ReceiptMaker/ProcessCash
             break;
 
         case 3:
-            //Call ProcessCheck
+            //Call ReceiptMaker/ProcessCheck
             break;
     }
 

@@ -10,37 +10,35 @@ namespace Point_of_Sale_Terminal_project
     {
         //To create the receipt with items ordered, subtotal, grand total, payment info
         //TO DO: pass in list with order & add it to each case
-        public string MakeReceipt(string paymentChoice, double grandTotal, double salesTax, double subTotal)
+        public string MakeReceipt(int paymentChoice, double grandTotal, double salesTax, double subTotal)
         {
 
         switch (paymentChoice)
             {
-            case "1":
+            case 1:
                 ProcessCash Cash = new ProcessCash();
                 string cashOutput = Cash.GetPayment(grandTotal);
-                    Console.WriteLine($"Your subtotal is ${subTotal}; your grand total is ${grandTotal}.");
-                    Console.WriteLine($"Payment Info: {cashOutput}");
-                break;
+                    return $"Your subtotal is ${subTotal}; your grand total is ${grandTotal}. Payment Info: {cashOutput}"; 
+                
 
-            case "2":
+            case 2:
                 ProcessCard Card = new ProcessCard();
                 string cardOutput = Card.GetPayment(grandTotal);
-                    Console.WriteLine($"Your subtotal is ${subTotal}; your grand total is ${grandTotal}.");
-                    Console.WriteLine($"Payment Info: {cardOutput}");
-                break;
+                    return $"Your subtotal is ${subTotal}; your grand total is ${grandTotal}. Payment Info: {cardOutput}"; 
+                
 
-            case "3":
+            case 3:
                 ProcessCheck Check = new ProcessCheck();
                 string checkOutput = Check.GetPayment(grandTotal);
-                    Console.WriteLine($"Your subtotal is ${subTotal}; your grand total is ${grandTotal}.");
-                    Console.WriteLine($"Payment Info: {checkOutput}");
-                break;
+                    return $"Your subtotal is ${subTotal}; your grand total is ${grandTotal}. Payment Info: {checkOutput}";
+                
 
             default:
                     //user shouldn't see this...just making visual studio happy
-                    Console.WriteLine($"Your subtotal is ${subTotal}; your grand total is ${grandTotal}.");
-                    break;
+                    return $"Your subtotal is ${subTotal}; your grand total is ${grandTotal}.";
+                    
             }
+            
         }
     }
 }
