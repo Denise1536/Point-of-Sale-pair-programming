@@ -10,7 +10,7 @@ namespace Point_of_Sale_Terminal_project
     {
         //12 items minimum, stored in a list: name, category, price, description
 
-        private List<Wine> WineInventory {  get; set; }
+        public List<Wine> WineInventory {  get; set; }
 
         public Menu()
         {
