@@ -8,7 +8,8 @@ using System.Security;
 double subTotal = -1;
 double salesTax = -1;
 double grandTotal = -1;
-
+bool keepOrdering = true;
+int numberOrdered = -1;
 
 Menu menuInstance = new Menu();
 FileManager fileManager = new FileManager(menuInstance);
@@ -60,31 +61,41 @@ fileManager.LoadWineList(wineList);
 
 Console.WriteLine("Welcome to Platinum Pour! We have a variety of white wines for sale. Here is our menu:");
 
-Console.WriteLine(new string('-', 100));
-menuInstance.DisplayMenu();
-
-//Allow the user to choose quantity ordered
-
-Console.WriteLine();
-Console.WriteLine("Please enter the wine you'd like to order:");
-string input = Console.ReadLine();
-
-while(!isValidBin(wineList, input))
+do
 {
-    Console.WriteLine("That is not a valid selection, please review the Bin Numbers and try again:");
-    input = Console.ReadLine();
-}
-int binNumber = int.Parse(input);
-Wine orderedWine = menuInstance.FindWine(binNumber);
+    Console.WriteLine(new string('-', 100));
+    menuInstance.DisplayMenu();
 
-Console.WriteLine($"How many bottles of {orderedWine.WineName}, would you like?");
-input = Console.ReadLine();
+    Console.WriteLine();
+    Console.WriteLine("Please enter the wine you'd like to order:");
+    string input = Console.ReadLine();
 
-while (!isValidQuantity(orderedWine, input))
-{
-    Console.WriteLine("That is not a valid entry, please check that you are not trying to order more bottles than we have in stock.");
-    input = Console.ReadLine();
-}
+    while (!isValidBin(wineList, input))
+    {
+        Console.WriteLine("That is not a valid selection, please review the Bin Numbers and try again:");
+        input = Console.ReadLine();
+    }
+    int binNumber = int.Parse(input);
+    Wine orderedWine = menuInstance.FindWine(binNumber);
+
+    //Allow the user to choose quantity ordered
+    Console.WriteLine($"How many bottles of {orderedWine.WineName}, would you like?");
+    numberOrdered = int.Parse(Console.ReadLine());
+    //add them to the order
+
+    Console.WriteLine("Do you want to order more? (y/n)");
+    string orderMore = Console.ReadLine();
+    if (orderMore == "y" || orderMore == "Y")
+    { keepOrdering = true; }
+
+    else { keepOrdering = false; }
+
+    while (!isValidQuantity(orderedWine, input))
+    {
+        Console.WriteLine("That is not a valid entry, please check that you are not trying to order more bottles than we have in stock.");
+        input = Console.ReadLine();
+    }
+} while (keepOrdering == true);
 
 
 
@@ -93,7 +104,7 @@ while (!isValidQuantity(orderedWine, input))
 
 
 //Allow them to re-display the menu and complete the order
-
+//using the do while loop above for that
 
 
 //Give the subtotal, sales tax, and grand total (rounding issues/math library)
@@ -107,8 +118,6 @@ Console.WriteLine($"Your total order comes to ${subTotal}, plus ${salesTax} in t
 
 //Ask for payment type
 int paymentChoice = -1;
-
-//TO DO: add a try catch for Format Exception?
 
 do
 {
