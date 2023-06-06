@@ -11,7 +11,7 @@ namespace Point_of_Sale_Terminal_project
 {
     internal class FileManager
     {
-        private string FilePath = "./Assests/DataFiles/WineList.txt";
+        private string FilePath = "./Assets/DataFiles/WineList.txt";
 
         private Menu MenuInstance;
         public FileManager(Menu menuInstance)
@@ -19,11 +19,14 @@ namespace Point_of_Sale_Terminal_project
             MenuInstance = menuInstance;
         }
 
-        public void LoadWineList()
+        public void LoadWineList(Menu menuInstance)
         {
-            List<Wine> wineList = MenuInstance.GetMenuList();
+            
 
-            if (!File.Exists(FilePath))
+            List<Wine> wineList = MenuInstance.GetMenuList();
+            FileInfo fileInfo = new FileInfo(FilePath);
+
+            if (fileInfo.Length == 0)
             {
                
                 Wine boizel = new Wine(101, "Boizel", "Champagne", "Champagne, FR", "NV", 49.99, 24);
@@ -76,7 +79,7 @@ namespace Point_of_Sale_Terminal_project
             }
         }
 
-        public void SaveWineList()
+        public void SaveWineList(List<Wine> wineList)
         {
             using (StreamWriter writer = new StreamWriter(FilePath, false))
             {
@@ -88,6 +91,6 @@ namespace Point_of_Sale_Terminal_project
 
         }
 
-       
+
     }
 }
