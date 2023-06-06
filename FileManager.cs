@@ -19,7 +19,8 @@ namespace Point_of_Sale_Terminal_project
             MenuInstance = menuInstance;
         }
 
-        public void LoadWineList(Menu menuInstance)
+
+        public void LoadWineList(Menu MenuInstance)
         {
             
 
@@ -78,6 +79,7 @@ namespace Point_of_Sale_Terminal_project
 
             }
         }
+
 
         public void SaveWineList(List<Wine> wineList)
         {
