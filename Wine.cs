@@ -29,12 +29,12 @@ namespace Point_of_Sale_Terminal_project
 
         public override string ToString()
         {
-            return string.Format("Bin: (0), (1), (2), (3), (4), $(5). (6) in stock.", BinNumber, WineName, Varietal, Region, Vintage, Price, InventoryCount);
+            return $"Bin: {BinNumber, 4} {WineName, -27} {Varietal, -20} {Region, -25} {Vintage,-5} {Price, 10:c}  {InventoryCount, 4} in stock.";
         }
 
         public string ReceiptString()
         {
-            return string.Format("(0), $(1)", WineName, Price);
+            return $"{WineName, 20}, {Price, 10:c}";
         }
     }
 }

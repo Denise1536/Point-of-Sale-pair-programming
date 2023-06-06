@@ -17,6 +17,12 @@ namespace Point_of_Sale_Terminal_project
             WineInventory = new List<Wine>();
         }
 
+        public Wine FindWine(int binNumber)
+        {
+            Wine foundWine = WineInventory.FirstOrDefault(wine => wine.BinNumber == binNumber);
+            return foundWine;            
+        }
+
         public void AddWine(Wine newWine)
         {
             WineInventory.Add(newWine);
@@ -25,6 +31,11 @@ namespace Point_of_Sale_Terminal_project
         public void RemoveWine(Wine newWine)
         {
             WineInventory.Remove(newWine);
+        }
+
+        public void UpdateInventory(Wine wineOrdered, int quantityOrdered)
+        {
+            wineOrdered.InventoryCount = - quantityOrdered;
         }
 
         public List<Wine> GetMenuList()
@@ -38,9 +49,11 @@ namespace Point_of_Sale_Terminal_project
             {
                 Console.WriteLine(wine.ToString());
 
-                Console.WriteLine("Please order by Bin Number.");
             }
+            Console.WriteLine("Please order by Bin Number.");
         }
+
+
 
     }
 }

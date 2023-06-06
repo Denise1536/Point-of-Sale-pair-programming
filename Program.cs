@@ -3,25 +3,91 @@
 
 using Point_of_Sale_Terminal_project;
 using System;
+using System.Security;
 
 double subTotal = -1;
 double salesTax = -1;
 double grandTotal = -1;
 
+
 Menu menuInstance = new Menu();
 FileManager fileManager = new FileManager(menuInstance);
 
-fileManager.LoadWineList(menuInstance);
+bool isValidBin(List<Wine> wineList, string orderedWine) 
+{
+    int binNumber = 0;
+    if (int.TryParse(orderedWine, out binNumber))
+    {
+        if(wineList.Any(wine => wine.BinNumber == binNumber))
+        {
+            return true;
+        }
+        else
+        {
+            return false; 
+        }
+    }
+    else 
+    {
+        return false; 
+    }
+}
 
-menuInstance.DisplayMenu();
+bool isValidQuantity(Wine wineOrdered, string quantityOrdered)
+{
+    int quantityNumber = 0;
+    if(int.TryParse(quantityOrdered, out quantityNumber))
+    {
+        if(wineOrdered.InventoryCount >= quantityNumber) 
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    else { return false; }
+
+}
+
+List<Wine> wineList = menuInstance.GetMenuList();
+fileManager.LoadWineList(wineList);
+
+
 
 //Present the menu to the user, and let them choose an item (by number or letter)
+
 Console.WriteLine("Welcome to Platinum Pour! We have a variety of white wines for sale. Here is our menu:");
-menuInstance.GetMenuList();
 
-
+Console.WriteLine(new string('-', 100));
+menuInstance.DisplayMenu();
 
 //Allow the user to choose quantity ordered
+
+Console.WriteLine();
+Console.WriteLine("Please enter the wine you'd like to order:");
+string input = Console.ReadLine();
+
+while(!isValidBin(wineList, input))
+{
+    Console.WriteLine("That is not a valid selection, please review the Bin Numbers and try again:");
+    input = Console.ReadLine();
+}
+int binNumber = int.Parse(input);
+Wine orderedWine = menuInstance.FindWine(binNumber);
+
+Console.WriteLine($"How many bottles of {orderedWine.WineName}, would you like?");
+input = Console.ReadLine();
+
+while (!isValidQuantity(orderedWine, input))
+{
+    Console.WriteLine("That is not a valid entry, please check that you are not trying to order more bottles than we have in stock.");
+    input = Console.ReadLine();
+}
+
+
+
 
 //Give the user a line total (item price * quantity)
 
@@ -71,6 +137,8 @@ do
     }
 
 } while (paymentChoice != 1 && paymentChoice != 2 && paymentChoice != 3);
+
+fileManager.SaveWineList(wineList);
 
 
 //Display a receipt with items ordered, subtotal, grand total, payment info
