@@ -63,13 +63,15 @@ bool isValidQuantity(Wine wineOrdered, string quantityOrdered)
 
 
 
+
+
 //Present the menu to the user, and let them choose an item (by number or letter)
 
 Console.WriteLine("Welcome to Platinum Pour! We have a variety of white wines for sale. Here is our menu:");
 
 do
 {
-    Console.WriteLine(new string('-', 100));
+    Console.WriteLine(new string('-', 117));
     menuInstance.DisplayMenu();
 
     Console.WriteLine();

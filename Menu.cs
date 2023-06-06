@@ -55,6 +55,7 @@ namespace Point_of_Sale_Terminal_project
                 Console.WriteLine(wine.ToString());
 
             }
+            Console.WriteLine(new string('-', 117));
             Console.WriteLine("Please order by Bin Number.");
         }
 
