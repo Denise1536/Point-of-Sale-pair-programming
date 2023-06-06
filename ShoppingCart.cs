@@ -14,25 +14,72 @@ namespace Point_of_Sale_Terminal_project
             Cart = new List<Wine>();
         }
 
-        public void AddWine(Wine wine)
+        public List<Wine> returnCartList()
         {
-            Cart.Add(wine);
-            string addItem = wine.ReceiptString();
-            Console.WriteLine($"{addItem} has been added to your cart.");
+            return Cart;
         }
 
-        public void RemoveWine(Wine wine)
+        public void AddWineToCart(List<Wine> wineInventory, Wine wineOrdered, int quantityOrdered)
         {
-            bool isRemoved = Cart.Remove(wine);
-            string removeItem = wine.ReceiptString();  
-            if (isRemoved)
+            Wine wineInInventory = wineInventory.FirstOrDefault(x => x.BinNumber == wineOrdered.BinNumber);
+            Wine wineInCart = Cart.FirstOrDefault(x => x.BinNumber == wineOrdered.BinNumber);
+
+            if (wineInInventory != null && wineInInventory.InventoryCount >= quantityOrdered)
             {
-                Console.WriteLine($"{removeItem} has been removed from your cart.");
+                wineInInventory.InventoryCount-=quantityOrdered;
+                
+                if(wineInCart != null)
+                {
+                    wineInCart.InventoryCount += quantityOrdered;
+                }
+                else
+                {
+                    wineInCart = new Wine(wineOrdered.BinNumber, wineOrdered.WineName, wineOrdered.Varietal, wineOrdered.Region, wineOrdered.Vintage, wineOrdered.Price, quantityOrdered);
+                    Cart.Add(wineInCart);
+                }
+            }                     
+
+
+            string formatString = "";
+            double priceOfQtyAdded = wineInCart.Price * quantityOrdered;
+            if (quantityOrdered == 1)
+            {
+                formatString = $"{quantityOrdered} bottle of {wineOrdered.WineName} has been added to your cart, for {priceOfQtyAdded:c}.";
             }
             else
             {
-                Console.WriteLine($"{removeItem} is not in your cart.");
+                formatString = $"{quantityOrdered} bottles of {wineOrdered.WineName} have been added to your cart, for {priceOfQtyAdded:c}.";
             }
+            Console.WriteLine(formatString);
+        }
+
+        public void RemoveWine(List<Wine> wineInventory, Wine wineToRemove, int quantityToRemove)
+        {
+            Wine wineInCart = Cart.FirstOrDefault(x => x.BinNumber == wineToRemove.BinNumber);
+            if (wineInCart != null && wineInCart.InventoryCount >= quantityToRemove)
+            {
+                wineInCart.InventoryCount -= quantityToRemove;
+                if(wineInCart.InventoryCount == 0)
+                {
+                    Cart.Remove(wineInCart);
+                }
+                Wine wineInInventory = wineInventory.FirstOrDefault(x => x.BinNumber == wineToRemove.BinNumber );
+                if (wineInInventory != null)
+                {
+                    wineInInventory.InventoryCount += quantityToRemove;
+                }
+            }
+            string formatString = "";
+            if (quantityToRemove == 1)
+            {
+                formatString = $"{quantityToRemove} bottle of {wineToRemove.WineName} has been removed from your cart.";
+            }
+            else
+            {
+                formatString = $"{quantityToRemove} bottles of {wineToRemove.WineName} have been removed from your cart.";
+            }
+
+            Console.WriteLine(formatString);
         }
 
         public void ClearCart()
