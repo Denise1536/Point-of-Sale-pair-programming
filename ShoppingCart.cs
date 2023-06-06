@@ -19,6 +19,25 @@ namespace Point_of_Sale_Terminal_project
             return Cart;
         }
 
+        public double GetSubTotal()
+        {
+            double subTotal = Cart.Select(x => x.Price * x.InventoryCount).Sum();
+            return subTotal;
+        }
+        public double GetTax()
+        {
+            double subTotal = GetSubTotal();
+            double tax = subTotal * .06;
+            return tax;
+        }
+        public double GetGrandTotal()
+        {
+            double subTotal = GetSubTotal();
+            double tax = GetTax();
+            double grandTotal = subTotal + tax;
+            return grandTotal;
+        }
+
         public void AddWineToCart(List<Wine> wineInventory, Wine wineOrdered, int quantityOrdered)
         {
             Wine wineInInventory = wineInventory.FirstOrDefault(x => x.BinNumber == wineOrdered.BinNumber);
@@ -95,11 +114,13 @@ namespace Point_of_Sale_Terminal_project
             {
                 Console.WriteLine(wine.ReceiptString());
             }
+            double subTotal = GetSubTotal();
+            Console.WriteLine($"Current total: {subTotal}");
         }
 
-        public void FinalOrder()
-        {
-            Console.WriteLine("You ordered:");
+        public void DisplayFinalOrder()
+        {           
+            
             foreach (Wine wine in Cart)
             {
                 Console.WriteLine(wine.ReceiptString());
