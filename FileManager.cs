@@ -19,7 +19,7 @@ namespace Point_of_Sale_Terminal_project
             MenuInstance = menuInstance;
         }
 
-        public void LoadWineList()
+        public void LoadWineList(Menu MenuInstance)
         {
             List<Wine> wineList = MenuInstance.GetMenuList();
 
@@ -76,17 +76,17 @@ namespace Point_of_Sale_Terminal_project
             }
         }
 
-        public void SaveWineList()
-        {
-            using (StreamWriter writer = new StreamWriter(FilePath, false))
-            {
-                foreach (Wine wine in wineList)
-                {
-                    writer.WriteLine(JsonConvert.SerializeObject(wine));
-                }
-            }
+        //public void SaveWineList()
+        //{
+        //    using (StreamWriter writer = new StreamWriter(FilePath, false))
+        //    {
+        //        foreach (Wine wine in wineList)
+        //        {
+        //            writer.WriteLine(JsonConvert.SerializeObject(wine));
+        //        }
+        //    }
 
-        }
+        //}
 
        
     }

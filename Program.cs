@@ -8,12 +8,19 @@ double subTotal = -1;
 double salesTax = -1;
 double grandTotal = -1;
 
+Menu menuInstance = new Menu();
+FileManager fileManager = new FileManager(menuInstance);
+
+fileManager.LoadWineList(menuInstance);
+
+menuInstance.DisplayMenu();
+
 
 
 //Present the menu to the user, and let them choose an item (by number or letter)
 Console.WriteLine("Welcome to Platinum Pour! We have a variety of white wines for sale. Here is our menu:");
-Menu FullMenu = new Menu();
-FullMenu.ToString();
+menuInstance.DisplayMenu();
+
 
 //Allow the user to choose quantity ordered
 
