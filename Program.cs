@@ -12,6 +12,11 @@ double grandTotal = -1;
 
 Menu menuInstance = new Menu();
 FileManager fileManager = new FileManager(menuInstance);
+List<Wine> wineList = menuInstance.GetMenuList();
+fileManager.LoadWineList(wineList);
+ShoppingCart cart = new ShoppingCart();
+List<Wine> wineCart = cart.returnCartList();
+
 
 bool isValidBin(List<Wine> wineList, string orderedWine) 
 {
@@ -38,7 +43,7 @@ bool isValidQuantity(Wine wineOrdered, string quantityOrdered)
     int quantityNumber = 0;
     if(int.TryParse(quantityOrdered, out quantityNumber))
     {
-        if(wineOrdered.InventoryCount >= quantityNumber) 
+        if(wineOrdered.InventoryCount >= quantityNumber && quantityNumber > 0) 
         {
             return true;
         }
@@ -51,8 +56,7 @@ bool isValidQuantity(Wine wineOrdered, string quantityOrdered)
 
 }
 
-List<Wine> wineList = menuInstance.GetMenuList();
-fileManager.LoadWineList(wineList);
+
 
 
 
@@ -85,6 +89,8 @@ while (!isValidQuantity(orderedWine, input))
     Console.WriteLine("That is not a valid entry, please check that you are not trying to order more bottles than we have in stock.");
     input = Console.ReadLine();
 }
+int quantityOrdered = int.Parse(input);
+cart.AddWineToCart(wineList, orderedWine, quantityOrdered);
 
 
 

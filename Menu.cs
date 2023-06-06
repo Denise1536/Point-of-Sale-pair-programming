@@ -33,9 +33,14 @@ namespace Point_of_Sale_Terminal_project
             WineInventory.Remove(newWine);
         }
 
-        public void UpdateInventory(Wine wineOrdered, int quantityOrdered)
+        public void UpdateInventoryRemove(Wine wineOrdered, int quantityOrdered)
         {
-            wineOrdered.InventoryCount = - quantityOrdered;
+            wineOrdered.InventoryCount -= quantityOrdered;
+        }
+
+        public void UpdateInventoryAdd(Wine wineOrdered, int quantityOrdered)
+        {
+            wineOrdered.InventoryCount += quantityOrdered;
         }
 
         public List<Wine> GetMenuList()
