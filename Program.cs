@@ -8,12 +8,13 @@ double subTotal = -1;
 double salesTax = -1;
 double grandTotal = -1;
 
-
+Menu menuInstance = new Menu();
+FileManager fileManager = new FileManager(menuInstance);
 
 //Present the menu to the user, and let them choose an item (by number or letter)
 Console.WriteLine("Welcome to Platinum Pour! We have a variety of white wines for sale. Here is our menu:");
-Menu FullMenu = new Menu();
-FullMenu.ToString();
+menuInstance.GetMenuList();
+
 
 //Allow the user to choose quantity ordered
 
@@ -41,6 +42,7 @@ do
     Console.WriteLine("Enter the number that matches your payment method: 1: Credit Card; 2: Cash; 3: Check");
     paymentChoice = int.Parse(Console.ReadLine());
 
+
     switch (paymentChoice)
     {
         case 1:
@@ -61,7 +63,7 @@ do
         Console.WriteLine("That is not a valid option.");
     }
 
-} while (paymentChoice > 0 || paymentChoice < 4);
+} while (paymentChoice != 1 && paymentChoice != 2 && paymentChoice != 3);
 
 
 //Display a receipt with items ordered, subtotal, grand total, payment info
