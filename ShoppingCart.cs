@@ -49,5 +49,15 @@ namespace Point_of_Sale_Terminal_project
                 Console.WriteLine(wine.ReceiptString());
             }
         }
+
+        public void FinalOrder()
+        {
+            Console.WriteLine("You ordered:");
+            foreach (Wine wine in Cart)
+            {
+                Console.WriteLine(wine.ReceiptString());
+            }
+        }
+
     }
 }
