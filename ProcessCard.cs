@@ -104,7 +104,7 @@ namespace Point_of_Sale_Terminal_project
 
             Console.WriteLine("Please enter the credit card expiration date (MM/YY) :");
             expDate = Console.ReadLine();
-            while (!IsCreditCardValid(expDate))
+            while (!IsExpirationDateValid(expDate))
             {
                 Console.WriteLine("That is not a valid expiration date, please make sure your card is not expired and you entered the date using (MM/YY) format.");
                 expDate = Console.ReadLine();
