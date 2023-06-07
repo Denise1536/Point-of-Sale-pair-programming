@@ -34,7 +34,7 @@ namespace Point_of_Sale_Terminal_project
 
         public string ReceiptString()
         {
-            return $"{InventoryCount, 4} {WineName, -30} {Price, 10:c}";
+            return $"{InventoryCount, -10} {BinNumber, -10} {WineName, -30} {Price, 10:c}";
         }
     }
 }
