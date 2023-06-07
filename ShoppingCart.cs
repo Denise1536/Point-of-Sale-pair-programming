@@ -19,6 +19,25 @@ namespace Point_of_Sale_Terminal_project
             return Cart;
         }
 
+        public double GetSubTotal()
+        {
+            double subTotal = Cart.Select(x => x.Price * x.InventoryCount).Sum();
+            return subTotal;
+        }
+        public double GetTax()
+        {
+            double subTotal = GetSubTotal();
+            double tax = subTotal * .06;
+            return tax;
+        }
+        public double GetGrandTotal()
+        {
+            double subTotal = GetSubTotal();
+            double tax = GetTax();
+            double grandTotal = subTotal + tax;
+            return grandTotal;
+        }
+
         public void AddWineToCart(List<Wine> wineInventory, Wine wineOrdered, int quantityOrdered)
         {
             Wine wineInInventory = wineInventory.FirstOrDefault(x => x.BinNumber == wineOrdered.BinNumber);
@@ -88,22 +107,46 @@ namespace Point_of_Sale_Terminal_project
             Console.WriteLine("Your cart has been emptied");
         }
 
+        public void DisplayCartHeader()
+        {
+            string columnOne = "Quantity".PadRight(10);
+            string columnTwo = "Bin #".PadRight(10);
+            string columnThree = "Wine".PadRight(30);
+            string columnFour = "Price".PadRight(10);
+            string header = columnOne + columnTwo + columnThree + columnFour;
+            string separator = new string('-', header.Length);
+
+            Console.WriteLine(header);
+            Console.WriteLine(separator);
+        }
+
         public void DisplayCart()
         {
             Console.WriteLine("Items in your cart:");
+            DisplayCartHeader();
             foreach (Wine wine in Cart)
             {
                 Console.WriteLine(wine.ReceiptString());
             }
+            double subTotal = GetSubTotal();
+            Console.WriteLine($"Current total: {subTotal}");
         }
 
-        public void FinalOrder()
+        public void DisplayFinalOrder()
         {
-            Console.WriteLine("You ordered:");
+            DisplayCartHeader();
+            
             foreach (Wine wine in Cart)
             {
                 Console.WriteLine(wine.ReceiptString());
             }
+            double subTotal = GetSubTotal();
+            double tax = GetTax();
+            double grandTotal = GetGrandTotal();
+
+            Console.WriteLine($"Subtotal: {subTotal:c}");
+            Console.WriteLine($"Tax: {tax:c}");
+            Console.WriteLine($"Total: {grandTotal:c}");
         }
 
     }

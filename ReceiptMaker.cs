@@ -14,7 +14,7 @@ namespace Point_of_Sale_Terminal_project
         ShoppingCart Order = new ShoppingCart();
         public void CallFinalOrder()
         {
-         Order.FinalOrder();
+         Order.DisplayFinalOrder();
         }
 
         public string MakeReceipt(int paymentChoice, double grandTotal, double salesTax, double subTotal)
