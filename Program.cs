@@ -6,8 +6,8 @@ using System;
 using System.Security;
 using System.Security.Cryptography.X509Certificates;
 
-double subTotal = -1;
-double salesTax = -1;
+//double subTotal = -1;
+//double salesTax = -1;
 double grandTotal = -1;
 bool keepOrdering = true;
 int numberOrdered = -1;
@@ -19,6 +19,9 @@ List<Wine> wineList = menuInstance.GetMenuList();
 fileManager.LoadWineList(wineList);
 ShoppingCart cart = new ShoppingCart();
 List<Wine> wineCart = cart.returnCartList();
+ProcessCard card = new ProcessCard();
+ProcessCash cash = new ProcessCash();
+ProcessCheck check = new ProcessCheck();
 
 
 bool isValidBin(List<Wine> wineList, string orderedWine) 
@@ -95,25 +98,25 @@ do
 
     Console.WriteLine();
     Console.WriteLine("Please enter just the number of the wine you'd like to order:");
-    string input = Console.ReadLine();
+    string userInput = Console.ReadLine();
 
-    while (!isValidBin(wineList, input))
+    while (!isValidBin(wineList, userInput))
     {
         Console.WriteLine("That is not a valid selection, please review the Bin Numbers and try again:");
-        input = Console.ReadLine();
+        userInput = Console.ReadLine();
     }
-    int binNumber = int.Parse(input);
+    int binNumber = int.Parse(userInput);
     Wine orderedWine = menuInstance.FindWine(binNumber);
 
     //Allow the user to choose quantity ordered
     Console.WriteLine($"How many bottles of {orderedWine.WineName}, would you like?");
-    input = Console.ReadLine();
-    while (!isValidQuantity(orderedWine, input))
+    userInput = Console.ReadLine();
+    while (!isValidQuantity(orderedWine, userInput))
     {
         Console.WriteLine("That is not a valid entry, please check that you are not trying to order more bottles than we have in stock.");
-        input = Console.ReadLine();
+        userInput = Console.ReadLine();
     }
-    int quantityOrdered = int.Parse(input);
+    int quantityOrdered = int.Parse(userInput);
     cart.AddWineToCart(wineList, orderedWine, quantityOrdered);
 
     //lineTotal = price * quantityOrdered;
@@ -140,22 +143,22 @@ do
     {
         
         Console.WriteLine("please enter the bin number of the wine you would like to edit:");
-        input = Console.ReadLine() ;
-        while(!isValidBin(wineCart, input))
+        userInput = Console.ReadLine() ;
+        while(!isValidBin(wineCart, userInput))
         {
             Console.WriteLine("That is not a valid selection. Please check the bin number and try again:");
-            input = Console.ReadLine();
+            userInput = Console.ReadLine();
         }
-        int binToRemove = int.Parse(input);
+        int binToRemove = int.Parse(userInput);
         Wine wineToRemove = menuInstance.FindWine(binToRemove);
         Console.WriteLine("How many bottles would you like to remove?");
-        input = Console.ReadLine();
-        while(!isValidQuantity(wineToRemove, input))
+        userInput = Console.ReadLine();
+        while(!isValidQuantity(wineToRemove, userInput))
         {
             Console.WriteLine("That is not a valid entry. Please check the amount of bottles you would like to remove and try again:");
-            input = Console.ReadLine();
+            userInput = Console.ReadLine();
         }
-        int quantityToRemove = int.Parse(input);
+        int quantityToRemove = int.Parse(userInput);
         cart.RemoveWine(wineList, wineToRemove, quantityToRemove);
         goto CartReview;
 
@@ -173,6 +176,8 @@ do
 //Allow them to re-display the menu and complete the order
 //using the do while loop above for that
 
+console.WriteLine("Here is your final order:");
+
 cart.DisplayFinalOrder();
 
 Console.WriteLine();
@@ -181,6 +186,7 @@ Console.WriteLine("How would you like to pay?");
 Console.WriteLine("Enter (1) for Cash");
 Console.WriteLine("Enter (2) for Credit");
 Console.WriteLine("Enter (3) for Check");
+grandTotal = cart.GetGrandTotal();
 string input = Console.ReadLine();
 while (!isValid123(input))
 {
@@ -191,13 +197,13 @@ int paymentChoice = int.Parse(input);
 switch (paymentChoice)
 {
     case 1: 
-        Console.WriteLine();
+        Console.WriteLine(cash.GetPayment(grandTotal));
         break;
     case 2: 
-        Console.WriteLine();
+        Console.WriteLine(card.GetPayment(grandTotal));
         break;
     case 3: 
-        Console.WriteLine();
+        Console.WriteLine(check.GetPayment(grandTotal));
         break;
 }
 
