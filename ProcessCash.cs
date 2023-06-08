@@ -33,7 +33,7 @@ namespace Point_of_Sale_Terminal_project
             }
             double cash = double.Parse(input);
             change = cash - grandTotal;
-            return $"You paid ${cash} in cash. Your change is ${change}.";
+            return $"You paid {cash:c} in cash. Your change is {change:c}.";
         }
 
 
