@@ -29,7 +29,7 @@ namespace Point_of_Sale_Terminal_project
                 Console.WriteLine("That is not a valid check number. Please try again, entering only numbers:");
                 checkNumber = Console.ReadLine();
             }
-            return $"You paid ${grandTotal} with check number {checkNumber}.";
+            return $"You paid {grandTotal:c} with check number {checkNumber}.";
         }
 
 

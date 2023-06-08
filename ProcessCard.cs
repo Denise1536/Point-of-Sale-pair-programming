@@ -119,7 +119,7 @@ namespace Point_of_Sale_Terminal_project
                 cvvNumber = Console.ReadLine();
             }
 
-            return $"Thank you, {grandTotal} has been charged to the credit card ending in: {trimmedCC}, Expiration: {expDate}. CCV: {cvvNumber}.";
+            return $"Thank you, {grandTotal:c} has been charged to the credit card ending in: {trimmedCC}, Expiration: {expDate}. CCV: {cvvNumber}.";
         }
 
 

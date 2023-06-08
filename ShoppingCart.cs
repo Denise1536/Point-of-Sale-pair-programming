@@ -129,7 +129,7 @@ namespace Point_of_Sale_Terminal_project
                 Console.WriteLine(wine.ReceiptString());
             }
             double subTotal = GetSubTotal();
-            Console.WriteLine($"Current total: {subTotal}");
+            Console.WriteLine($"Current total: {subTotal:c}");
         }
 
         public void DisplayFinalOrder()
